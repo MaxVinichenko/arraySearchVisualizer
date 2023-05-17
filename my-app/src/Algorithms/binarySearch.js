@@ -1,16 +1,20 @@
 //returns visited nodes in order 
-
-export default function binarySearch (nodes,target){
-    visitedNodes = [];
-    middle = Math.ceil((length(nodes)-1)/2)
+//export 
+function binarySearch (nodes,target){
+    let visitedNodes = [];
+    const greyNodes = [];
+    let middle = Math.ceil((nodes.length-1)/2)
     
     while (true){
-    
-        if (nodes[middle]==target){
-            visitedNodes.append(middle);
-            return [visitedNodes, balckNodes]
-        }
 
+        if (nodes[middle]==target){
+            visitedNodes.push(middle);
+            return [visitedNodes, greyNodes]
+        }
+        if (nodes[middle]>target){
+            middle=middle/2
+        }
+        console.log("test")
 
 
 
@@ -18,7 +22,7 @@ export default function binarySearch (nodes,target){
     }
 
 
-
-
-    return [visitedNodes, balckNodes]
+    return [visitedNodes, greyNodes]
 }
+
+binarySearch([],null);

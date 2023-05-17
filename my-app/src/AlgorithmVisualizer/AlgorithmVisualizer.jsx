@@ -14,12 +14,16 @@ export default function AlgorithmVisualizer() {
     let count = nElements.current.value;
     let newNodes = [];
 
-    console.log(count);
+    let index=0;
+
     while (count > 0){
-      newNodes.push([])
-      count-=1
+      newNodes.push({index:index, isVisited:false})
+      count-=1;
+      index+=1;
     }
     setNodes([...newNodes]);
+
+    console.log(nodes)
   }
 
   //Mounting the grid on start 
@@ -39,12 +43,12 @@ export default function AlgorithmVisualizer() {
 
   return (
     <>
-    <input type='number' ref={nElements} defaultValue={10} onChange={handleSetNodes}></input>
+    <input type='number' ref={nElements} defaultValue={15} onChange={handleSetNodes}></input>
     <button onClick={handleVisualizeBinarySearch}>Visualize BinarySearch</button>
 
     <div className="container">
         {nodes.map((node) => {
-            return (<Node ></Node>);
+            return (<Node node={node}></Node>);
         })}
     </div>
     </>

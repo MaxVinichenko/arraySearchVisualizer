@@ -5,6 +5,10 @@
   border: 1px solid black;
 }
 
+.visitedNode{
+    background-color: rgb(237, 237, 75);
+}
+
 .node-visited {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
