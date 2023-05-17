@@ -12,14 +12,14 @@ export default function AlgorithmVisualizer() {
   //creates nodes based of nElements
   const handleSetNodes =  () => {
     let count = nElements.current.value;
-    let grid = [];
+    let newNodes = [];
 
     console.log(count);
     while (count > 0){
-      grid.push([])
+      newNodes.push([])
       count-=1
     }
-    setNodes([...grid]);
+    setNodes([...newNodes]);
   }
 
   //Mounting the grid on start 
@@ -29,8 +29,10 @@ export default function AlgorithmVisualizer() {
 
 
   function handleVisualizeBinarySearch () {
-    //Just needs to change colours of nodes when you press it 
-    
+
+
+
+
   }
 
 
@@ -42,7 +44,7 @@ export default function AlgorithmVisualizer() {
 
     <div className="container">
         {nodes.map((node) => {
-            return (<Node></Node>);
+            return (<Node ></Node>);
         })}
     </div>
     </>
