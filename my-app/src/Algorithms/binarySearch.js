@@ -1,28 +1,33 @@
 //returns visited nodes in order 
-//export 
-function binarySearch (nodes,target){
-    let visitedNodes = [];
+
+export default function binarySearch (nodes,target){
+    const visitedNodes = [];
     const greyNodes = [];
-    let middle = Math.ceil((nodes.length-1)/2)
-    
-    while (true){
+    let left = 0;
+    let right = nodes.length-1;
 
-        if (nodes[middle]==target){
-            visitedNodes.push(middle);
-            return [visitedNodes, greyNodes]
+    while (right>=left){
+        let middle = Math.floor((left+right)/2);
+        visitedNodes.push(middle);
+        let updatedGreyNodes = [];
+        let count =0;
+        for (let i=middle; i>=0; i--){
+            updatedGreyNodes.push(count);
+            count ++;
         }
-        if (nodes[middle]>target){
-            middle=middle/2
+        if (nodes[middle].index==target){
+            return [visitedNodes, greyNodes];
         }
-        console.log("test")
-
-
-
-
+        if (nodes[middle].index>target){
+            right = middle -1;
+        }
+        if (nodes[middle].index<target){
+            left = middle +1;
+        }
+        greyNodes.push(updatedGreyNodes);
     }
 
-
-    return [visitedNodes, greyNodes]
+    return [visitedNodes, greyNodes];
 }
 
-binarySearch([],null);
+

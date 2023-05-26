@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./AlgorithmVisualizer.css";
 import Node from "./Node/Node.jsx";
+import binarySearch from "../Algorithms/binarySearch";
 
 
 export default function AlgorithmVisualizer() {
@@ -22,8 +23,6 @@ export default function AlgorithmVisualizer() {
       index+=1;
     }
     setNodes([...newNodes]);
-
-    console.log(nodes)
   }
 
   //Mounting the grid on start 
@@ -33,6 +32,12 @@ export default function AlgorithmVisualizer() {
 
 
   function handleVisualizeBinarySearch () {
+   
+
+    let [visitedNodes, greyNodes] = binarySearch(nodes, -65);
+
+    console.log(visitedNodes);
+    console.log(greyNodes);
 
 
 
