@@ -3,13 +3,18 @@
   height: 40px;
   background-color: rgb(209, 232, 232);
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.visitedNode{
-    background-color: rgb(237, 237, 75);
+/*
+.greyNode{
+  background-color: grey;
 }
+*/
 
-.node-visited {
+.visitedNode {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
@@ -22,22 +27,24 @@
   
   @keyframes visitedAnimation {
     0% {
-      transform: scale(0.3);
-      background-color: rgba(0, 0, 66, 0.75);
-      border-radius: 100%;
+      transform: scale(0.25);
+      background-color: rgb(243, 228, 115);
+      border-radius: 0%;
     }
   
     50% {
-      background-color: rgba(17, 104, 217, 0.75);
+      transform: scale(0.5);
+      background-color: rgb(221, 205, 81);
     }
   
     75% {
-      transform: scale(1.2);
-      background-color: rgba(0, 217, 159, 0.75);
+      transform: scale(0.75);
+      background-color: rgb(202, 182, 37);
     }
   
     100% {
       transform: scale(1);
-      background-color: rgba(0, 190, 218, 0.75);
+      background-color: rgb(225, 159, 61);
     }
   }
+

@@ -16,6 +16,7 @@ export default function binarySearch (nodes,target){
             count ++;
         }
         if (nodes[middle].index==target){
+            nodes[middle].isLast=true;
             return [visitedNodes, greyNodes];
         }
         if (nodes[middle].index>target){
