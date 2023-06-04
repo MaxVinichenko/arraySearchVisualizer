@@ -1,17 +1,24 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import React, { useState, useRef, useEffect } from "react";
-import AlgorithmVisualizer from './AlgorithmVisualizer/AlgorithmVisualizer';
-import Header from './Components/header';
+import ArrayPage from './pages/ArrayPage';
+import PricingPage from './pages/pricingPage.jsx';
+import Home from './pages/home';
 
-function App() {
-
-
+export default function App() {
   return (
     <div className="App">
-      <Header/>
-      <AlgorithmVisualizer/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/arrayVisualizer" element={<ArrayPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
 
-export default App;
+
+
