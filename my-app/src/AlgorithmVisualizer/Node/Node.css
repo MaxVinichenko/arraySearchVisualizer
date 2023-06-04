@@ -1,18 +1,21 @@
 .node{
   width: 40px;
   height: 40px;
-  background-color: rgb(209, 232, 232);
+  background-color: rgb(203, 243, 203);
   border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-/*
 .greyNode{
   background-color: grey;
 }
-*/
+/* .foundNode{
+  background-color: green;
+}
+.redNode{
+  background-color: red;
+} */
 
 .visitedNode {
     animation-name: visitedAnimation;
@@ -24,7 +27,7 @@
     animation-fill-mode: forwards;
     animation-play-state: running;
   }
-  
+
   @keyframes visitedAnimation {
     0% {
       transform: scale(0.25);
@@ -47,4 +50,5 @@
       background-color: rgb(225, 159, 61);
     }
   }
+
 

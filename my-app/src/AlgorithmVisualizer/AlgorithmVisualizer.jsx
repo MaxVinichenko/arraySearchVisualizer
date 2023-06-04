@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./AlgorithmVisualizer.css";
 import Node from "./Node/Node.jsx";
-import binarySearch from "../Algorithms/binarySearch";
+import binarySearch from "../Array Search Algorithms/binarySearch";
+import linearSearch from "../Array Search Algorithms/linearSearch";
 
 
 export default function AlgorithmVisualizer() {
@@ -24,7 +25,14 @@ export default function AlgorithmVisualizer() {
     let value=0;
 
     while (count > 0){
-      newNodes.push({index:index, isVisited:false, isGrey:false, value:value, isLast:false})
+      newNodes.push({
+        index:index,
+        isVisited:false,
+        isGrey:false,
+        value:value, 
+        isLast:false,
+        isFound: false
+      })
       count-=1;
       index+=1;
       value+=parseInt(increment.current.value);
@@ -42,19 +50,22 @@ export default function AlgorithmVisualizer() {
       if (nodes[visitedIndex]){
           setTimeout(() => {
             updatedNodes[visitedIndex].isVisited=true;
-            setNodes([...updatedNodes])
+            setNodes([...updatedNodes]);
           }, index*800)
+          
       }
     })
 
-    greyNodes.forEach(greyIndex => {
-      if (nodes[greyIndex]){
-        updatedNodes[greyIndex].isGrey = true;
-        setNodes([...updatedNodes]);
-      }
+    greyNodes.forEach((greyArray, i) => {
+      setTimeout (()=>{      
+        greyArray.forEach((greyIndex, index) =>{
+        if (nodes[greyIndex].isVisited==false){
+            updatedNodes[greyIndex].isGrey = true;
+            setNodes([...updatedNodes]);
+        }
+        })
+      }, i*800);
     })
-
-    console.log(nodes);
   }
 
   function handleReset (){
@@ -63,9 +74,23 @@ export default function AlgorithmVisualizer() {
     handleSetNodes();
   }
 
-  function handleChangeTarget (){
+  async function handleVisualizeLinearSearch () {
+    const target = targetVal.current.value
+    const [visitedNodes, greyNodes] = linearSearch(nodes,target);
+
+    for (const visNode of visitedNodes){
+      await new Promise((resolve)=> setTimeout(resolve,400));
+      nodes[visNode].isVisited=true;
+      setNodes([...nodes]);
+    }
+
+    greyNodes.forEach((greyNode, index)=>{
+      nodes[greyNode].isGrey=true;
+      setNodes([...nodes]);
+    })
 
   }
+
 
   return (
     <>
@@ -76,10 +101,11 @@ export default function AlgorithmVisualizer() {
     <input type="number" ref={increment} defaultValue={1} onChange={handleSetNodes}></input>
     <br />
     <label htmlFor="inputField">Target Value: </label>
-    <input type="number" ref={targetVal} onChange={handleChangeTarget} defaultValue={-1}/>
+    <input type="number" ref={targetVal}  defaultValue={-1}/>
     <br />
     <div className="container">
       <button onClick={handleVisualizeBinarySearch}>Visualize BinarySearch</button>
+      <button onClick={handleVisualizeLinearSearch}>Visualize Linear Search</button>
       <button onClick={handleReset}>Reset</button>
     </div>
     

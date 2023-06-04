@@ -1,15 +1,20 @@
 import React from "react";
-import "./Node.css"
+import "./Node.css";
 
-export default function Node({node}) {
-    const isVisited = node.isVisited ? "visitedNode" : "";
-    const isGrey = node.isGrey ? "greyNode" : "";
-    const isLast = node.isLast ? "lastNode" : "";
-    const value = node.value;
+export default function Node({ node }) {
+  const isVisited = node.isVisited ? "visitedNode" : "";
+  const isGrey = node.isGrey ? "greyNode" : "";
+  const isLast = node.isLast ? "lastNode" : "";
+  const value = node.value;
+  const isFound = node.isFound ? "foundNode" : "";
 
-    return (
-    <div 
-    className={`node ${isVisited} ${isGrey} ${isLast}`}
-    >{value}</div>  
-    );
+  if (node.isFound == false && node.isLast == true){
+    isFound="redNode";
+  }
+
+  return (
+    <div className={`node ${isVisited} ${isGrey} ${isLast} ${isFound}`}>
+      {value}
+    </div>
+  );
 }
