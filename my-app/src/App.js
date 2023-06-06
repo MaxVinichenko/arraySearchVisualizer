@@ -4,6 +4,7 @@ import './App.css';
 import ArrayPage from './pages/ArrayPage';
 import PricingPage from './pages/pricingPage.jsx';
 import Home from './pages/home';
+import SortingPage from './pages/SortingPage';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/arrayVisualizer" element={<ArrayPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/sortingVisualizer" element={<SortingPage/>} />
         </Routes>
       </Router>
     </div>

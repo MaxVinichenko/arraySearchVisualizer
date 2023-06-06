@@ -10,6 +10,10 @@ export default function Home() {
     navigate("/arrayVisualizer");
   }
 
+  function handleSortingVis (){
+    navigate("/sortingVisualizer");
+  }
+
   return (
     <div className="home container">
         
@@ -19,7 +23,7 @@ export default function Home() {
         </div>
 
         
-        <div className="box sortingVisualizer">
+        <div onClick={handleSortingVis} className="box sortingVisualizer">
 
         </div>
         <div className="box pathfindingVisualizer">

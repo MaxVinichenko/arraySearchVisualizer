@@ -1,0 +1,48 @@
+.App{
+    height: auto;
+}
+.container{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+  
+.vertical{
+flex-direction: column;
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+button {
+    margin-left: 10px;
+    padding: 12px 24px;
+
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+
+    text-decoration: none;
+    font-size: 16px;
+
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 4px rgb(93, 93, 95);
+
+    background-color: black;
+    color:white;
+  }
+
+  button:hover {
+    box-shadow: 0 0 4px 4px white;
+  }
+
+  button:active {
+    box-shadow: 0 0 4px 4px green;
+  }
+
+ 

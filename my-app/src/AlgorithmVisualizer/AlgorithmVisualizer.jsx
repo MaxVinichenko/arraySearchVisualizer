@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./AlgorithmVisualizer.css";
-import Node from "./Node/Node.jsx";
 import binarySearch from "../Array Search Algorithms/binarySearch";
 import linearSearch from "../Array Search Algorithms/linearSearch";
-
+import "./AlgorithmVisualizer.css";
+import Node from "./Node/Node.jsx";
 
 export default function AlgorithmVisualizer() {
   //number of elements to sort through (userInput)
@@ -18,7 +17,7 @@ export default function AlgorithmVisualizer() {
   }, [])
 
   //Create nodes
-  const handleSetNodes =  () => {
+  function handleSetNodes() {
     let count = nElements.current.value;
     let newNodes = [];
     let index=0;
@@ -77,16 +76,17 @@ export default function AlgorithmVisualizer() {
   async function handleVisualizeLinearSearch () {
     const target = targetVal.current.value
     const [visitedNodes, greyNodes] = linearSearch(nodes,target);
+    let updatedNodes = nodes;
 
     for (const visNode of visitedNodes){
       await new Promise((resolve)=> setTimeout(resolve,400));
-      nodes[visNode].isVisited=true;
-      setNodes([...nodes]);
+      updatedNodes[visNode].isVisited=true;
+      setNodes([...updatedNodes]);
     }
 
     greyNodes.forEach((greyNode, index)=>{
-      nodes[greyNode].isGrey=true;
-      setNodes([...nodes]);
+      updatedNodes[greyNode].isGrey=true;
+      setNodes([...updatedNodes]);
     })
 
   }
@@ -109,13 +109,11 @@ export default function AlgorithmVisualizer() {
       <button onClick={handleReset}>Reset</button>
     </div>
     
-
     <div className="container">
         {nodes.map((node) => {
-            return (<Node node={node}></Node>);
+            return (<Node key={node.index} node={node}></Node>);
         })}
     </div>
     </>
   );
-
 }

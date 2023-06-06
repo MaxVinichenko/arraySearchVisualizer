@@ -6,11 +6,11 @@ import Navbar from '../Components/Navbar';
 
 export default function ArrayPage() {
   return (
-    <div className="ArrayAlgorithmsPage">
+    <>
       <Navbar/>
       <Header/>
       <AlgorithmVisualizer/>
-    </div>
+    </>
   );
 }
 

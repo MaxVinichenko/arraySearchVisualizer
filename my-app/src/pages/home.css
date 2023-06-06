@@ -1,22 +1,40 @@
 .home{
     background-color: black;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     display: flex;
     margin: 0;
     padding: 0;
+
 }
 .box{
     height: 30vw;
     width: 30vw;
-    background-color: grey;
+    background-color: black;
     margin: 1vw;
     flex: 1;
+    border: none;
+    box-shadow: 0 0 5px 5px white;
+    border-radius: 10px;
+}
+.box:hover{
+    box-shadow: 0 0 10px 10px grey;
 }
 .arrayVisualizer{
-    background-image: url("../assets/ArrayImage.jpeg");
+    background-image: url("../assets/ArrayImagev2.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+.sortingVisualizer{
+    background-image: url("../assets/sortingImagev2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;  
+}
+.pathfindingVisualizer{
+    background-image: url("../assets/pathfindingImage.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;   
+}

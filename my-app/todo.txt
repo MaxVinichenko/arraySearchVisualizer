@@ -4,3 +4,7 @@ next up:
     -red if not found 
     -green if found 
     -add a message saying "falue found at index x" or value not in array
+-for number of array elements, make a slider 
+-for increment arra values by add a slider
+-for target value, click 
+-fix reset bugs 
