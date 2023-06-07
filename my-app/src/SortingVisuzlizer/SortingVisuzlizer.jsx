@@ -12,8 +12,6 @@ export default function SortingVisuzlizer() {
   }, []);
 
 
-
-
   //creating nodes
   function handleGenerateNewArray() {
     let newNodes = [];
@@ -30,33 +28,54 @@ export default function SortingVisuzlizer() {
     }
     updateNodes([...newNodes]);
   }
+  
+  
   const wait = (timeToDelay) =>new Promise((resolve) => setTimeout(resolve, timeToDelay));
   
   function handleVisualizeInsertion() {
     const visualize = async () => {
-      let [newNodes, animationNodes] = insertionSort([...nodes]);
-      let oldNodes = [...nodes];
+      let swappedI = insertionSort(nodes);
+      let animationNodes = [...nodes];
+      let previous = null;
 
-      
-
-      for (let i = 0; i < animationNodes.length; i++) {
-        
-        await wait(1);
-        // if (animationNodes[i][0]=="highlited"){
-        //   let firstI = animationNodes[i][1].index
-        //   oldNodes[firstI].isHighlited=true;
-        //   updateNodes([...oldNodes]);
-        // }
-
-        if (animationNodes[i][0] == "swapped") {
-          oldNodes[animationNodes[i][1].index] = animationNodes[i][1];
-          oldNodes[animationNodes[i][1].index].isSwapped = true;
-
-          oldNodes[animationNodes[i][2].index] = animationNodes[i][2];
-          oldNodes[animationNodes[i][2].index].isSwapped = true;
-
-          updateNodes([...oldNodes]);
+      for (let i=0; i<swappedI.length; i++){
+        //swappedI is an array of arrays of either 2 or one elements 
+        //2 elements means swap the two, 1 means highlit the current node
+        if (swappedI[i].length===1){
+          //logic for highliting 
+            if (previous!=null){
+              for (let i=0; i<animationNodes.length; i++){
+                animationNodes[i].isHighlited=false;
+              }
+              updateNodes([...animationNodes]);
+            }
+            previous = swappedI[i][0];
+            animationNodes[previous].isHighlited=true;
+            //logic for setting inPlace = true 
+            if (previous>0){
+              for (let j=0; j<previous; j++){
+                animationNodes[j].isInplace=true;
+              }
+            }
+            updateNodes([...animationNodes]);
+          continue
         }
+        //logic for swapping 
+        else{
+          let firstI = swappedI[i][0];
+          let secondI = swappedI[i][1];
+          animationNodes[firstI].isSwapped=true;
+          animationNodes[secondI].isSwapped=true;
+          await wait(20);
+          animationNodes[firstI].isSwapped=false;
+          animationNodes[secondI].isSwapped=false;
+          [animationNodes[firstI], animationNodes[secondI]] = [animationNodes[secondI],animationNodes[firstI]]
+          updateNodes([...animationNodes]);
+        }
+      }
+      //no highlited elements at the end 
+      for (let i=0; i<animationNodes.length; i++){
+        animationNodes[i].isHighlited=false;
       }
     };
     visualize();

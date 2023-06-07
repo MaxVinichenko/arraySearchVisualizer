@@ -8,3 +8,5 @@ next up:
 -for increment arra values by add a slider
 -for target value, click 
 -fix reset bugs 
+-for visualizing insertion sort, try to replace the for loops for 
+updating isHighlited and other stuff to just O(1) instead of O(n)

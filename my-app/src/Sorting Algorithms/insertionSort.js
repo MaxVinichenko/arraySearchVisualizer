@@ -1,29 +1,21 @@
 export default function insertionSort(nodes) {
-  let newNodes = nodes;
-  let animationNodes = [["highlited", newNodes[0]]];
+  let newNodes = [...nodes];
+  let swappedI =[];
 
-  for (let i = 1; i < newNodes.length; i++) {
-    animationNodes.push(["highlited", newNodes[i]]);
+  for (let i = 0; i < newNodes.length; i++) {
     let index = i;
+    swappedI.push([i]);
     while (index >= 1) {
       if (newNodes[index].value >= newNodes[index - 1].value) {
-        animationNodes.push(["inPlace", newNodes[index - 1], newNodes[index]]);
         break;
       }
-
       [newNodes[index - 1], newNodes[index]] = [
         newNodes[index],
-        newNodes[index - 1],];
-
-        newNodes[index-1].index=index-1
-        newNodes[index].index=index
-
-      animationNodes.push(["swapped", newNodes[index], newNodes[index-1]]);
-      if (index - 1 === 0) {
-        animationNodes.push(["inPlace", newNodes[index - 1], newNodes[index]]);
-      }
+        newNodes[index - 1]
+      ];
+      swappedI.push([index, index-1]);
       index -= 1;
     }
   }
-  return [newNodes, animationNodes];
+  return swappedI;
 }
