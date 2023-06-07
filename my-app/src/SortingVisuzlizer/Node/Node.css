@@ -3,3 +3,14 @@
     margin: 2px;
     background-color: rgb(99, 200, 73);
 }
+.highlitedNode{
+    background-color: blue;
+}
+
+.inplaceNode{
+    background-color: darkgreen;
+}
+
+.swappedNode{
+    background-color: rgb(232, 230, 114);
+}

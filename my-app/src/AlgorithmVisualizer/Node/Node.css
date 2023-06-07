@@ -7,6 +7,9 @@
   align-items: center;
   justify-content: center;
 }
+.node:hover{
+  cursor: pointer;
+}
 .greyNode{
   background-color: grey;
 }
