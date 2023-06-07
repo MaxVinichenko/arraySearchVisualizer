@@ -3,6 +3,7 @@ import binarySearch from "../Array Search Algorithms/binarySearch";
 import linearSearch from "../Array Search Algorithms/linearSearch";
 import "./AlgorithmVisualizer.css";
 import Node from "./Node/Node.jsx";
+import Slider from "../Components/Slider";
 
 export default function AlgorithmVisualizer() {
   //number of elements to sort through (userInput)
@@ -91,8 +92,8 @@ export default function AlgorithmVisualizer() {
       setNodes([...updatedNodes]);
     });
   }
-  function handleChangeTarget (node){
-    targetVal.current.value=node.value;
+  function handleChangeTarget(node) {
+    targetVal.current.value = node.value;
   }
 
   return (
@@ -118,6 +119,7 @@ export default function AlgorithmVisualizer() {
         </div>
         <div className="menuBox">
           <label htmlFor="inputField">Target Value</label>
+          <Slider></Slider>
           <input type="number" ref={targetVal} defaultValue={14} />
         </div>
       </div>
@@ -134,7 +136,13 @@ export default function AlgorithmVisualizer() {
 
       <div className="container">
         {nodes.map((node) => {
-          return <Node onClick={()=>handleChangeTarget(node)} key={node.index} node={node}></Node>;
+          return (
+            <Node
+              onClick={() => handleChangeTarget(node)}
+              key={node.index}
+              node={node}
+            ></Node>
+          );
         })}
       </div>
     </>

@@ -9,6 +9,11 @@
 }
 .node:hover{
   cursor: pointer;
+  background-color: rgb(164, 245, 164);
+  
+}
+.node:active{
+  background-color: green;
 }
 .greyNode{
   background-color: grey;

@@ -1,0 +1,30 @@
+.horizontal-slider {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+.thumb {
+  cursor: pointer;
+  background: black;
+  border: 5px solid white;
+  border-radius: 100%;
+  display: block;
+}
+.track {
+  position: relative;
+  background: black;
+}
+.track.track-0 {
+  background: white;
+}
+.horizontal-slider .track {
+  top: 20px;
+  height: 4px;
+}
+.horizontal-slider .thumb {
+  top: 12px;
+  width: 10px;
+  outline: none;
+  height: 10px;
+  line-height: 38px;
+}
