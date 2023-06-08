@@ -17,6 +17,16 @@
     box-shadow: 0 0 5px 5px white;
     border-radius: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .home{
+        flex-direction: column;
+    }
+    .box{
+        height: 400px;
+        width: 400px;
+    }
+}
 .box:hover{
     box-shadow: 0 0 10px 10px grey;
 }
