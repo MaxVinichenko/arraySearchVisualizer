@@ -71,8 +71,6 @@ export default function AlgorithmVisualizer() {
   }
 
   function handleReset() {
-    nElements.current.value = 15;
-    increment.current.value = 1;
     handleSetNodes();
   }
 
@@ -98,7 +96,7 @@ export default function AlgorithmVisualizer() {
 
   return (
     <>
-      <div className="container">
+      <div className="menuGrid">
         <div className="menuBox">
           <label htmlFor="inputField">Number Of Array Elements</label>
           <input
@@ -107,6 +105,7 @@ export default function AlgorithmVisualizer() {
             defaultValue={15}
             onChange={handleSetNodes}
           ></input>
+          <button className="Bsmall">Default</button>
         </div>
         <div className="menuBox">
           <label htmlFor="inputField">Increment Array Values By</label>
@@ -116,11 +115,13 @@ export default function AlgorithmVisualizer() {
             defaultValue={1}
             onChange={handleSetNodes}
           ></input>
+          <button className="Bsmall">Default</button>
         </div>
         <div className="menuBox">
           <label htmlFor="inputField">Target Value</label>
           <Slider></Slider>
           <input type="number" ref={targetVal} defaultValue={14} />
+          <button className="Bsmall">Default</button>
         </div>
       </div>
 

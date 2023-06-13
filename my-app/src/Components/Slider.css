@@ -1,28 +1,38 @@
 .horizontal-slider {
   width: 100%;
   max-width: 500px;
-  margin: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .thumb {
   cursor: pointer;
   background: black;
   border: 5px solid white;
   border-radius: 100%;
-  display: block;
+  width: 10px;
+  height: 10px;
+  outline: none;
 }
+
 .track {
-  position: relative;
   background: black;
+  height: 9px;
 }
+
 .track.track-0 {
   background: white;
 }
+
+/* the line  */
 .horizontal-slider .track {
-  top: 20px;
   height: 4px;
 }
+/* the circle */
 .horizontal-slider .thumb {
-  top: 12px;
   width: 10px;
   outline: none;
   height: 10px;
