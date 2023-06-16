@@ -66,7 +66,7 @@ export default function SortingVisuzlizer() {
           let secondI = swappedI[i][1];
           animationNodes[firstI].isSwapped = true;
           animationNodes[secondI].isSwapped = true;
-          await wait(20);
+          await wait(2);
           animationNodes[firstI].isSwapped = false;
           animationNodes[secondI].isSwapped = false;
           [animationNodes[firstI], animationNodes[secondI]] = [
@@ -115,7 +115,7 @@ export default function SortingVisuzlizer() {
           animationNodes[firstI],
         ];
         updateNodes([...animationNodes]);
-        await wait(1);
+        await wait(2);
         animationNodes[firstI].isSwapped = false;
         animationNodes[secondI].isSwapped = false;
         updateNodes([...animationNodes]);
