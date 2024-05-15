@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Node from "./Node/Node";
 import "./SortingVisuzlizer.css";
-import insertionSort from "../Sorting Algorithms/insertionSort";
-import bubblesort from "../Sorting Algorithms/bubbleSort";
+import insertionSort from "../Sorting_algorithms/insertionSort";
+import bubblesort from "../Sorting_algorithms/bubbleSort";
 
 export default function SortingVisuzlizer() {
   const [nodes, updateNodes] = useState([]);

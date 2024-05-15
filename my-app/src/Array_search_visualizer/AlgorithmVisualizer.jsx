@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import binarySearch from "../Array Search Algorithms/binarySearch";
-import linearSearch from "../Array Search Algorithms/linearSearch";
+import binarySearch from "../Array_search_algorithms/binarySearch.js";
+import linearSearch from "../Array_search_algorithms/linearSearch.js";
 import "./AlgorithmVisualizer.css";
 import Node from "./Node/Node.jsx";
-import Slider from "../Components/Slider";
+import Slider from "../Components/Slider.jsx";
 
 export default function AlgorithmVisualizer() {
   //number of elements to sort through (userInput)
