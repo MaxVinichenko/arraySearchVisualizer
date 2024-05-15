@@ -1,0 +1,63 @@
+.node{
+    width: 40px;
+    height: 40px;
+    background-color: rgb(203, 243, 203);
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .node:hover{
+    cursor: pointer;
+    background-color: rgb(164, 245, 164);
+    
+  }
+  .node:active{
+    background-color: green;
+  }
+  .greyNode{
+    background-color: grey;
+  }
+  /* .foundNode{
+    background-color: green;
+  }
+  .redNode{
+    background-color: red;
+  } */
+  
+  .visitedNode {
+      animation-name: visitedAnimation;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-delay: 0;
+      animation-direction: alternate;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-play-state: running;
+    }
+  
+    @keyframes visitedAnimation {
+      0% {
+        transform: scale(0.25);
+        background-color: rgb(243, 228, 115);
+        border-radius: 0%;
+      }
+    
+      50% {
+        transform: scale(0.5);
+        background-color: rgb(221, 205, 81);
+      }
+    
+      75% {
+        transform: scale(0.75);
+        background-color: rgb(202, 182, 37);
+      }
+    
+      100% {
+        transform: scale(1);
+        background-color: rgb(225, 159, 61);
+      }
+    }
+  
+  
+  
