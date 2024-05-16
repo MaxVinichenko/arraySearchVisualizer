@@ -23,6 +23,7 @@ export default function PathgingVisualizer(){
       let col=[];
       for(let i2=0; i2<ylen; i2++){
         col.push({
+          //these values are then passed to Node as props 
           x: i1,
           y: i2,
           isVisited: false,
@@ -32,6 +33,8 @@ export default function PathgingVisualizer(){
       newGrid.push(col);
     }
     setGrid([...newGrid]);
+    
+    function handleStartNode
   }
 
   return (
@@ -42,15 +45,13 @@ export default function PathgingVisualizer(){
       </div>
       <div className="container">
 
-        
-
         {
-          grid.map((col) => {
+          grid.map((col, x) => {
             return (
-              <div className="column">{ 
-                col.map((node, index) => {
+              <div className="column" key={x}>{ 
+                col.map((node, y) => {
                   return (
-                    <Node node={node} key={index} />
+                    <Node onClick=handleStartNode node={node} key={String(x)+String(y)} />
                   );
                 })
               }</div>
