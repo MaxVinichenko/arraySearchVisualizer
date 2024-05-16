@@ -35,26 +35,40 @@ export default function PathgingVisualizer(){
   }
 
   return (
-    <div className="container">
-      
+    <>
+      <div className="container">
+        <button onClick={handleSetGrid}>Visualize Dijkstra's</button>
+        <button onClick={handleSetGrid}>Reset</button>
+      </div>
+      <div className="container">
 
-      {
-        grid.map((col) => {
-          return (
-            <div className="column">{ 
-              col.map((node, index) => {
-                return (
-                  <Node node={node} key={index} />
-                );
-              })
-             }</div>
-          );
-        })
-      }
+        
 
-
-
-    </div>
+        {
+          grid.map((col) => {
+            return (
+              <div className="column">{ 
+                col.map((node, index) => {
+                  return (
+                    <Node node={node} key={index} />
+                  );
+                })
+              }</div>
+            );
+          })
+        }
+      </div>
+      <div className="container">
+        <font size="5">
+          <p> <b><u>Instructions:</u></b><br/> 
+            1: Click on any node to select it as the starting node. <br/> 
+            2: Click on another node to select it as the end node. <br/>
+            3: Click the button of the algorithm you want to visualize. <br/>
+          </p>
+        </font>
+        
+      </div>
+    </>
   );
 
 
