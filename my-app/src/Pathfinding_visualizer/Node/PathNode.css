@@ -1,4 +1,4 @@
-.node{
+.PathNode{
     width: 40px;
     height: 40px;
     background-color: rgb(232, 248, 232);
@@ -7,28 +7,22 @@
     align-items: center;
     justify-content: center;
   }
-  .node:hover{
+  .PathNode:hover{
     cursor: pointer;
     background-color: rgb(164, 245, 164);
     
   }
-  .node:active{
+  .PathNode:active{
     background-color: green;
   }
-  .greyNode{
-    background-color: grey;
+  .startPath{
+    background-color: rgb(0, 255, 0);
   }
-  .endNode{
+  .endPath{
     background-color: rgb(255, 0, 0);
   }
-  /* .foundNode{
-    background-color: green;
-  }
-  .redNode{
-    background-color: red;
-  } */
   
-  .visitedNode {
+  .visitedPath {
       animation-name: visitedAnimation;
       animation-duration: 1.5s;
       animation-timing-function: ease-out;

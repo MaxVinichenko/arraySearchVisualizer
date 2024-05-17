@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Node from "./Node/Node.jsx"
+import PathNode from "./Node/PathNode.jsx"
 
 export default function PathgingVisualizer(){
 
@@ -44,8 +44,11 @@ export default function PathgingVisualizer(){
       node.isEnd=true;
     }
     nodesSelectedRef.current++;
-    
+    let newGrid = grid;
+    newGrid[node.x][node.y]=node;
+    setGrid([...newGrid ]);
     // if selected more than 2, could add a pop up asking to reset the grid
+    console.log(node);
   }
 
   return (
@@ -62,7 +65,7 @@ export default function PathgingVisualizer(){
               <div className="column" key={x}>{ 
                 col.map((node, y) => {
                   return (
-                    <Node onClick={() => handleClickedNode(node)} node={node} key={String(x)+String(y)} />
+                    <PathNode onClick={() => handleClickedNode(node)} node={node} key={String(x)+String(y)} />
                   );
                 })
               }</div>
