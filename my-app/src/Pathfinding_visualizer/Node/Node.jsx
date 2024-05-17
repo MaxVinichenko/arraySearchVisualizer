@@ -4,7 +4,7 @@ import "./Node.css";
 export default function Node({ node, onClick }) {
   const isVisited = node.isVisited ? "visitedNode" : "";
   const isGrey = node.isGrey ? "greyNode" : "";
-  const isLast = node.isLast ? "lastNode" : "";
+  const isEnd = node.isLast ? "endNode" : "";
   const value = node.value;
   const isFound = node.isFound ? "foundNode" : "";
 
@@ -13,7 +13,7 @@ export default function Node({ node, onClick }) {
   }
 
   return (
-    <div onClick={()=>onClick(node)} className={`node ${isVisited} ${isGrey} ${isLast} ${isFound}`}>
+    <div onClick={()=>onClick(node)} className={`node ${isVisited} ${isGrey} ${isEnd} ${isFound}`}>
       {value}
     </div>
   );

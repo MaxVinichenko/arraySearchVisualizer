@@ -18,6 +18,9 @@
   .greyNode{
     background-color: grey;
   }
+  .endNode{
+    background-color: rgb(255, 0, 0);
+  }
   /* .foundNode{
     background-color: green;
   }

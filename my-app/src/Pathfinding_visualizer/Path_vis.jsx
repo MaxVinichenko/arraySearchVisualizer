@@ -4,6 +4,7 @@ import Node from "./Node/Node.jsx"
 export default function PathgingVisualizer(){
 
   const [grid, setGrid] = useState([]);
+  const nodesSelectedRef=useRef(0);
 
   //Mounting grid
   useEffect(() => {
@@ -27,14 +28,24 @@ export default function PathgingVisualizer(){
           x: i1,
           y: i2,
           isVisited: false,
+          isStart: false,
+          isEnd: false,
           distance: xlen*ylen
         });
       }
       newGrid.push(col);
     }
     setGrid([...newGrid]);
+  }
+  function handleClickedNode(node){
+    if (nodesSelectedRef.current==0){
+      node.isStart=true;
+    }else if (nodesSelectedRef.current==1){
+      node.isEnd=true;
+    }
+    nodesSelectedRef.current++;
     
-    function handleStartNode
+    // if selected more than 2, could add a pop up asking to reset the grid
   }
 
   return (
@@ -51,7 +62,7 @@ export default function PathgingVisualizer(){
               <div className="column" key={x}>{ 
                 col.map((node, y) => {
                   return (
-                    <Node onClick=handleStartNode node={node} key={String(x)+String(y)} />
+                    <Node onClick={() => handleClickedNode(node)} node={node} key={String(x)+String(y)} />
                   );
                 })
               }</div>
