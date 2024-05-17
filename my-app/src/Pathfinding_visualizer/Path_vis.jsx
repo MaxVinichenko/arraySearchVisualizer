@@ -1,10 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import PathNode from "./Node/PathNode.jsx"
+import DijkstrasAlgorithm from "../Pathfinding_algorithms/dijaxtras.js";
+import DepthFirstSearch from "../Pathfinding_algorithms/depthFirstSearch.js";
+import BreadthFirstSearch from "../Pathfinding_algorithms/breadthFirstSearch.js";
 
 export default function PathgingVisualizer(){
 
   const [grid, setGrid] = useState([]);
-  const nodesSelectedRef=useRef(0);
+  let nodesSelectedRef=useRef(0);
+  let startNodeRef=useRef(null);
+  let endNodeRef=useRef(null);
 
   //Mounting grid
   useEffect(() => {
@@ -40,8 +45,10 @@ export default function PathgingVisualizer(){
   function handleClickedNode(node){
     if (nodesSelectedRef.current==0){
       node.isStart=true;
+      startNodeRef=node;
     }else if (nodesSelectedRef.current==1){
       node.isEnd=true;
+      endNodeRef=node;
     }
     nodesSelectedRef.current++;
     let newGrid = grid;
@@ -51,10 +58,27 @@ export default function PathgingVisualizer(){
     console.log(node);
   }
 
+  //Pulls path and visited nodses from
+  function handleVisualizeDijkstras(){
+    const info=DijkstrasAlgorithm(grid, startNodeRef, endNodeRef);
+
+
+  }
+
+  function handleVisualizeDepthFirstSearch(){
+    const info=DepthFirstSearch(grid, startNodeRef, endNodeRef);
+  }
+
+  function handleVisualizeBreadthFirstSearch(){
+    const info=BreadthFirstSearch(grid, startNodeRef, endNodeRef);
+  }
+
   return (
     <>
       <div className="container">
-        <button onClick={handleSetGrid}>Visualize Dijkstra's</button>
+        <button onClick={handleVisualizeDijkstras}>Visualize Dijkstra's</button>
+        <button onClick={handleVisualizeDepthFirstSearch}>Visualize Depth First Search</button>
+        <button onClick={handleVisualizeBreadthFirstSearch}>Visualize Breadth First Search</button>
         <button onClick={handleSetGrid}>Reset</button>
       </div>
       <div className="container">

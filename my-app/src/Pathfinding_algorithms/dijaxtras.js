@@ -1,6 +1,6 @@
 
 
 
-export default function Dijaxtras(){
+export default function DijkstrasAlgorithm(){
     
 }
