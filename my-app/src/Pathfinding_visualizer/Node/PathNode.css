@@ -16,13 +16,17 @@
     background-color: green;
   }
   .startPath{
-    background-color: rgb(0, 255, 0);
+    background-color: rgb(0, 255, 0) !important;
   }
   .endPath{
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(255, 0, 0) !important;
+  }
+
+  .animateNeighbor{
+    background-color: lightblue;
   }
   
-  .visitedPath {
+  .animate {
       animation-name: visitedAnimation;
       animation-duration: 1.5s;
       animation-timing-function: ease-out;
@@ -32,31 +36,27 @@
       animation-fill-mode: forwards;
       animation-play-state: running;
     }
-
-    .animate{
-      background-color: purple;
-    }
   
     @keyframes visitedAnimation {
       0% {
         transform: scale(0.25);
-        background-color: rgb(243, 228, 115);
+        background-color: rgb(237, 115, 243);
         border-radius: 0%;
       }
     
       50% {
         transform: scale(0.5);
-        background-color: rgb(221, 205, 81);
+        background-color: rgb(235, 62, 192);
       }
     
       75% {
         transform: scale(0.75);
-        background-color: rgb(202, 182, 37);
+        background-color: rgb(232, 65, 241);
       }
     
       100% {
         transform: scale(1);
-        background-color: rgb(225, 159, 61);
+        background-color: rgb(157, 25, 137);
       }
     }
   

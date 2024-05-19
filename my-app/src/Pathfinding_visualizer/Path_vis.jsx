@@ -88,10 +88,6 @@ export default function PathgingVisualizer(){
 
     const animationNodes=BreadthFirstSearch(newGrid, startNodeRef, endNodeRef);
 
-    console.log(animationNodes);
-
-
-
     for (let i=0; i<animationNodes.length;i++){
 
       setTimeout(() => {
@@ -99,7 +95,14 @@ export default function PathgingVisualizer(){
         node.animate=true;
         newGrid[node.x][node.y]=node;
         setGrid([...newGrid])
-      }, i * 50);
+
+        for (let j=0; j<node.valNeighbors.length; j++){
+          let neighbor=node.valNeighbors[j];
+          neighbor.animateNeighbor=true;
+          newGrid[neighbor.x][neighbor.y]=neighbor;
+          setGrid([...newGrid])
+        }
+      }, i * 1000);
 
     }
 

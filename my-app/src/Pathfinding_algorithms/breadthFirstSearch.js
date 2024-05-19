@@ -8,19 +8,19 @@ function validNeighbors (node,xlen,ylen,grid){
     const y=node.y;
 
     if (0<=node.x-1 && node.x-1<xlen){
-        if (grid[x-1][y].isVisited==false){
+        if (grid[x-1][y].isVisited===false){
             validNeighbors.push(grid[x-1][y])
         }
-    }if (0<=node.x+1 && node.x+1<xlen){
-        if (grid[x+1][y].isVisited==false){
-            validNeighbors.push(grid[x+1][y])
-        }
     }if (0<=node.y-1 && node.y-1<ylen){
-        if (grid[x][y-1].isVisited==false){
+        if (grid[x][y-1].isVisited===false){
             validNeighbors.push(grid[x][y-1])
         }
+    }if (0<=node.x+1 && node.x+1<xlen){
+        if (grid[x+1][y].isVisited===false){
+            validNeighbors.push(grid[x+1][y])
+        }
     }if (0<=node.y+1 && node.y+1<ylen){
-        if (grid[x][y+1].isVisited==false){
+        if (grid[x][y+1].isVisited===false){
             validNeighbors.push(grid[x][y+1])
         }
     }
@@ -38,29 +38,28 @@ export default function BreadthFirstSearch(grid, startNodeRef, endNodeRef){
     const startNode=startNodeRef.current;
     const endNode=endNodeRef.current;
 
-
+    startNode.isVisited=true;
+    grid[startNode.x][startNode.y]=startNode;
     queue.push(startNode)
     let count=0;
+
     while (queue.length>0){
-        console.log(queue.length)
         let currentNode=queue.shift()
-        currentNode.isVisited=true;
-        grid[currentNode.x][currentNode.y]=currentNode;
+        let valNeighbors=validNeighbors(currentNode,xlen,ylen,grid)
+
+        currentNode.valNeighbors=valNeighbors;
 
         animationNodes.push(currentNode)
-
 
         if(currentNode.isEnd==true){
             break
         }
 
-        let valNeighbors=validNeighbors(currentNode,xlen,ylen,grid)
-
         for (let i=0; i<valNeighbors.length; i++){
+            valNeighbors[i].isVisited=true;
+            grid[valNeighbors[i].x][valNeighbors[i].y]=valNeighbors[i];
             queue.push(valNeighbors[i])
         }
-        count+=1;
-        console.log(count);
     }
 
     return animationNodes
