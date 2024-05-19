@@ -25,6 +25,8 @@ export default function PathgingVisualizer(){
   function handleSetGrid(){
     let newGrid =[];
     nodesSelectedRef.current=0;
+    startNodeRef.current=null;
+    endNodeRef.current=null;
 
     // The gird will be a 2D array of objects x is i1 and y is i2
     // so it'll be [x][y] starting at [0][0]
@@ -59,7 +61,7 @@ export default function PathgingVisualizer(){
       endNodeRef.current=node;
     }
     nodesSelectedRef.current++;
-    let newGrid = grid;
+    let newGrid = grid.slice();
     newGrid[node.x][node.y]=node;
     setGrid([...newGrid ]);
     // if selected more than 2, could add a pop up asking to reset the grid
@@ -82,22 +84,22 @@ export default function PathgingVisualizer(){
       setModalStatus(true);
       return null;
     }
-    const animationNodes=BreadthFirstSearch(grid, startNodeRef, endNodeRef);
+    let newGrid=grid.slice();
+
+    const animationNodes=BreadthFirstSearch(newGrid, startNodeRef, endNodeRef);
 
     console.log(animationNodes);
 
-    let newGrid=grid;
+
 
     for (let i=0; i<animationNodes.length;i++){
 
-      let node=animationNodes.shift()
-      node.animate=true;
-      newGrid[node.x][node.y]=node;
-      setGrid([...newGrid])
-
       setTimeout(() => {
+        let node=animationNodes.shift()
+        node.animate=true;
+        newGrid[node.x][node.y]=node;
         setGrid([...newGrid])
-      }, i * 800);
+      }, i * 50);
 
     }
 
@@ -107,9 +109,9 @@ export default function PathgingVisualizer(){
     <>
       <Modal status={modalStatus} setStatus={setModalStatus}/>
       <div className="container">
+        <button onClick={handleVisualizeBreadthFirstSearch}>Visualize Breadth First Search</button>
         <button onClick={handleVisualizeDijkstras}>Visualize Dijkstra's</button>
         <button onClick={handleVisualizeDepthFirstSearch}>Visualize Depth First Search</button>
-        <button onClick={handleVisualizeBreadthFirstSearch}>Visualize Breadth First Search</button>
         <button onClick={handleSetGrid}>Reset</button>
       </div>
       
