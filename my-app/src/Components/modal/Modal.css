@@ -1,0 +1,47 @@
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: transparent;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #000000;
+    padding: 20px 20px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 30vh; /* Limit the height */
+    background-color: rgb(242, 197, 197);
+    border: black 3px solid;
+}
+.modal-content > * {
+    background: inherit; /* Inherit parent's background color */
+}
+
+.close-modal {
+    padding: 4px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: rgb(237, 127, 127);
+    color: black;
+}

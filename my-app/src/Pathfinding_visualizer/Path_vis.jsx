@@ -4,10 +4,12 @@ import DijkstrasAlgorithm from "../Pathfinding_algorithms/dijaxtras.js";
 import DepthFirstSearch from "../Pathfinding_algorithms/depthFirstSearch.js";
 import BreadthFirstSearch from "../Pathfinding_algorithms/breadthFirstSearch.js";
 import Queue from 'std-queue';
+import Modal from "../Components/modal/Modal.jsx";
 
 export default function PathgingVisualizer(){
 
   const [grid, setGrid] = useState([]);
+  const [modalStatus, setModalStatus] = useState(false);
   let nodesSelectedRef=useRef(0);
   let startNodeRef=useRef(null);
   let endNodeRef=useRef(null);
@@ -76,7 +78,10 @@ export default function PathgingVisualizer(){
   }
 
   function handleVisualizeBreadthFirstSearch(){
-
+    if (startNodeRef.current==null || endNodeRef.current==null){
+      setModalStatus(true);
+      return null;
+    }
     const animationNodes=BreadthFirstSearch(grid, startNodeRef, endNodeRef);
 
     console.log(animationNodes);
@@ -90,18 +95,24 @@ export default function PathgingVisualizer(){
       newGrid[node.x][node.y]=node;
       setGrid([...newGrid])
 
+      setTimeout(() => {
+        setGrid([...newGrid])
+      }, i * 800);
+
     }
 
   }
 
   return (
     <>
+      <Modal status={modalStatus} setStatus={setModalStatus}/>
       <div className="container">
         <button onClick={handleVisualizeDijkstras}>Visualize Dijkstra's</button>
         <button onClick={handleVisualizeDepthFirstSearch}>Visualize Depth First Search</button>
         <button onClick={handleVisualizeBreadthFirstSearch}>Visualize Breadth First Search</button>
         <button onClick={handleSetGrid}>Reset</button>
       </div>
+      
       <div className="container">
 
         {
