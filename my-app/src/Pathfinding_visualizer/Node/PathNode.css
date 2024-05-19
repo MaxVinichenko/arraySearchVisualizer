@@ -25,10 +25,14 @@
   .animateNeighbor{
     background-color: lightblue;
   }
+
+  .pathBack{
+    background-color: yellow !important;
+  }
   
   .animate {
       animation-name: visitedAnimation;
-      animation-duration: 1.5s;
+      animation-duration: 1s;
       animation-timing-function: ease-out;
       animation-delay: 0;
       animation-direction: alternate;
@@ -40,23 +44,23 @@
     @keyframes visitedAnimation {
       0% {
         transform: scale(0.25);
-        background-color: rgb(237, 115, 243);
+        background-color: rgb(154, 217, 154);
         border-radius: 0%;
       }
     
       50% {
         transform: scale(0.5);
-        background-color: rgb(235, 62, 192);
+        background-color: rgb(127, 213, 127);
       }
     
       75% {
         transform: scale(0.75);
-        background-color: rgb(232, 65, 241);
+        background-color: rgb(107, 177, 107);
       }
     
       100% {
         transform: scale(1);
-        background-color: rgb(157, 25, 137);
+        background-color: rgb(81, 157, 81);
       }
     }
   

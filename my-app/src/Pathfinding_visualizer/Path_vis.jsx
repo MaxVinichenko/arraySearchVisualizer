@@ -43,7 +43,9 @@ export default function PathgingVisualizer(){
           isStart: false,
           isEnd: false,
           distance: xlen.current*ylen.current,
-          animate: false
+          animate: false,
+          pathBack: false,
+          prevNode: null
           //---------------------------------------------
         });
       }
@@ -69,16 +71,22 @@ export default function PathgingVisualizer(){
 
   //Pulls path and visited nodses from
   function handleVisualizeDijkstras(){
-    const info=DijkstrasAlgorithm(grid, startNodeRef, endNodeRef);
-
+    if (startNodeRef.current==null || endNodeRef.current==null){
+      setModalStatus(true);
+      return null;
+    }
 
   }
 
   function handleVisualizeDepthFirstSearch(){
-    
+    if (startNodeRef.current==null || endNodeRef.current==null){
+      setModalStatus(true);
+      return null;
+    }
     const info=DepthFirstSearch(grid, startNodeRef, endNodeRef);
   }
 
+  //BFS
   function handleVisualizeBreadthFirstSearch(){
     if (startNodeRef.current==null || endNodeRef.current==null){
       setModalStatus(true);
@@ -86,7 +94,8 @@ export default function PathgingVisualizer(){
     }
     let newGrid=grid.slice();
 
-    const animationNodes=BreadthFirstSearch(newGrid, startNodeRef, endNodeRef);
+    const [animationNodes, pathBack]=BreadthFirstSearch(newGrid, startNodeRef, endNodeRef);
+    
 
     for (let i=0; i<animationNodes.length;i++){
 
@@ -102,8 +111,19 @@ export default function PathgingVisualizer(){
           newGrid[neighbor.x][neighbor.y]=neighbor;
           setGrid([...newGrid])
         }
-      }, i * 1000);
+      }, i * 400);
+    }
 
+    const length = pathBack.length;
+    
+    for (let i=0; i<length; i++){
+      let backNode=pathBack.shift()
+      backNode.pathBack=true;
+
+      console.log(backNode)
+
+      newGrid[backNode.x][backNode.y]=backNode;
+      setGrid([...newGrid])
     }
 
   }

@@ -62,5 +62,44 @@ export default function BreadthFirstSearch(grid, startNodeRef, endNodeRef){
         }
     }
 
-    return animationNodes
+    //Now we need to backtrack to find the path
+    const xStart=endNode.x
+    const yStart=endNode.y
+    const xEnd=startNode.x
+    const yEnd=startNode.y
+    let pathBack=new Queue();
+
+    //first travel in x direciton
+    pathBack.push(endNode)
+    let x = xStart;
+    let diffX=x-xEnd;
+    
+    do{
+        if (diffX>0){
+            x-=1
+            pathBack.push(grid[x][yStart])
+        }else if(diffX<0){
+            x+=1
+            pathBack.push(grid[x][yStart])
+        }else if (diffX==0){
+            pathBack.push(grid[x][yStart])
+        }
+        diffX=x-xEnd
+    }while (diffX!=0);
+
+    // then travel in y direction 
+    let y = yStart;
+    let diffY=y-yEnd;
+    do{
+        if (diffY>0){
+            y--
+            pathBack.push(grid[x][y])
+        }else{
+            y++
+            pathBack.push(grid[x][y])
+        }
+        diffY=y-yEnd;
+    }while (diffY!=0);
+
+    return [animationNodes, pathBack]
 }
