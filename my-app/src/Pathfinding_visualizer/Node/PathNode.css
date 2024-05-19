@@ -32,6 +32,10 @@
       animation-fill-mode: forwards;
       animation-play-state: running;
     }
+
+    .animate{
+      background-color: purple;
+    }
   
     @keyframes visitedAnimation {
       0% {

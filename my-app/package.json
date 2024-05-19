@@ -13,6 +13,7 @@
     "react-scripts": "^5.0.1",
     "react-slider": "^2.0.5",
     "slider": "^1.0.4",
+    "std-queue": "^0.1.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

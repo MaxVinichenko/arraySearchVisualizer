@@ -3,6 +3,7 @@ import PathNode from "./Node/PathNode.jsx"
 import DijkstrasAlgorithm from "../Pathfinding_algorithms/dijaxtras.js";
 import DepthFirstSearch from "../Pathfinding_algorithms/depthFirstSearch.js";
 import BreadthFirstSearch from "../Pathfinding_algorithms/breadthFirstSearch.js";
+import Queue from 'std-queue';
 
 export default function PathgingVisualizer(){
 
@@ -10,6 +11,8 @@ export default function PathgingVisualizer(){
   let nodesSelectedRef=useRef(0);
   let startNodeRef=useRef(null);
   let endNodeRef=useRef(null);
+  let xlen = useRef(10);
+  let ylen = useRef(10);
 
   //Mounting grid
   useEffect(() => {
@@ -18,44 +21,46 @@ export default function PathgingVisualizer(){
 
     //Create grid
   function handleSetGrid(){
-    let xlen = 10;
-    let ylen = 10;
     let newGrid =[];
+    nodesSelectedRef.current=0;
 
     // The gird will be a 2D array of objects x is i1 and y is i2
     // so it'll be [x][y] starting at [0][0]
 
-    for(let i1=0; i1<xlen; i1++){
+    for(let i1=0; i1<xlen.current; i1++){
       let col=[];
-      for(let i2=0; i2<ylen; i2++){
+      for(let i2=0; i2<ylen.current; i2++){
         col.push({
           //these values are then passed to Node as props 
+          //---------------------------------------------
           x: i1,
           y: i2,
           isVisited: false,
           isStart: false,
           isEnd: false,
-          distance: xlen*ylen
+          distance: xlen.current*ylen.current,
+          animate: false
+          //---------------------------------------------
         });
       }
       newGrid.push(col);
     }
     setGrid([...newGrid]);
   }
+  
   function handleClickedNode(node){
     if (nodesSelectedRef.current==0){
       node.isStart=true;
-      startNodeRef=node;
+      startNodeRef.current=node;
     }else if (nodesSelectedRef.current==1){
       node.isEnd=true;
-      endNodeRef=node;
+      endNodeRef.current=node;
     }
     nodesSelectedRef.current++;
     let newGrid = grid;
     newGrid[node.x][node.y]=node;
     setGrid([...newGrid ]);
     // if selected more than 2, could add a pop up asking to reset the grid
-    console.log(node);
   }
 
   //Pulls path and visited nodses from
@@ -66,11 +71,27 @@ export default function PathgingVisualizer(){
   }
 
   function handleVisualizeDepthFirstSearch(){
+    
     const info=DepthFirstSearch(grid, startNodeRef, endNodeRef);
   }
 
   function handleVisualizeBreadthFirstSearch(){
-    const info=BreadthFirstSearch(grid, startNodeRef, endNodeRef);
+
+    const animationNodes=BreadthFirstSearch(grid, startNodeRef, endNodeRef);
+
+    console.log(animationNodes);
+
+    let newGrid=grid;
+
+    for (let i=0; i<animationNodes.length;i++){
+
+      let node=animationNodes.shift()
+      node.animate=true;
+      newGrid[node.x][node.y]=node;
+      setGrid([...newGrid])
+
+    }
+
   }
 
   return (
