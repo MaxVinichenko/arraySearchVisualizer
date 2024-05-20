@@ -5,11 +5,13 @@ import DepthFirstSearch from "../Pathfinding_algorithms/depthFirstSearch.js";
 import BreadthFirstSearch from "../Pathfinding_algorithms/breadthFirstSearch.js";
 import Queue from 'std-queue';
 import Modal from "../Components/modal/Modal.jsx";
+import { clear } from "@testing-library/user-event/dist/clear.js";
 
 export default function PathgingVisualizer(){
 
   const [grid, setGrid] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
+  const [animationTimeouts, setAnimationTimeouts] = useState([]);
   let nodesSelectedRef=useRef(0);
   let startNodeRef=useRef(null);
   let endNodeRef=useRef(null);
@@ -19,10 +21,23 @@ export default function PathgingVisualizer(){
   //Mounting grid
   useEffect(() => {
     handleSetGrid();
+
+    // Cleanup function
+    return () => {
+      clearAnimationTimeouts();
+    };
   }, []);
 
-    //Create grid
+    // Function to clear animation timeouts
+    const clearAnimationTimeouts = () => {
+      animationTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+      setAnimationTimeouts([]);
+    };
+
+
+  //Create grid
   function handleSetGrid(){
+    clearAnimationTimeouts();
     let newGrid =[];
     nodesSelectedRef.current=0;
     startNodeRef.current=null;
@@ -69,7 +84,7 @@ export default function PathgingVisualizer(){
     // if selected more than 2, could add a pop up asking to reset the grid
   }
 
-  //Pulls path and visited nodses from
+  //Dijkstras
   function handleVisualizeDijkstras(){
     if (startNodeRef.current==null || endNodeRef.current==null){
       setModalStatus(true);
@@ -96,10 +111,11 @@ export default function PathgingVisualizer(){
 
     const [animationNodes, pathBack]=BreadthFirstSearch(newGrid, startNodeRef, endNodeRef);
     
+    clearAnimationTimeouts(); // Clear previous timeouts
 
     for (let i=0; i<animationNodes.length;i++){
 
-      setTimeout(() => {
+      let timeoutId = setTimeout(()=>{
         let node=animationNodes.shift()
         node.animate=true;
         newGrid[node.x][node.y]=node;
@@ -111,7 +127,11 @@ export default function PathgingVisualizer(){
           newGrid[neighbor.x][neighbor.y]=neighbor;
           setGrid([...newGrid])
         }
-      }, i * 400);
+        
+      }, i*100);
+      setAnimationTimeouts(prev => [...prev, timeoutId]); // Store timeout ID
+
+
     }
 
     const length = pathBack.length;
