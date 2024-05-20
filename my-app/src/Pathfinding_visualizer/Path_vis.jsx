@@ -113,6 +113,7 @@ export default function PathgingVisualizer(){
     
     clearAnimationTimeouts(); // Clear previous timeouts
 
+    let animationTime=100
     for (let i=0; i<animationNodes.length;i++){
 
       let timeoutId = setTimeout(()=>{
@@ -128,22 +129,22 @@ export default function PathgingVisualizer(){
           setGrid([...newGrid])
         }
         
-      }, i*100);
+      }, i*animationTime);
       setAnimationTimeouts(prev => [...prev, timeoutId]); // Store timeout ID
-
-
     }
 
     const length = pathBack.length;
     
     for (let i=0; i<length; i++){
-      let backNode=pathBack.shift()
-      backNode.pathBack=true;
+      let timeoutId=setTimeout(()=>{
+        let backNode=pathBack.shift()
+        backNode.pathBack=true;
 
-      console.log(backNode)
+        console.log(backNode)
 
-      newGrid[backNode.x][backNode.y]=backNode;
-      setGrid([...newGrid])
+        newGrid[backNode.x][backNode.y]=backNode;
+        setGrid([...newGrid])
+      },animationNodes.length*animationTime+i*60)
     }
 
   }
