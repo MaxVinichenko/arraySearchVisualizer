@@ -98,7 +98,21 @@ export default function PathgingVisualizer(){
       setModalStatus(true);
       return null;
     }
-    const info=DepthFirstSearch(grid, startNodeRef, endNodeRef);
+
+    let newGrid=grid.slice()
+    const animationNodes=DepthFirstSearch(newGrid, startNodeRef, endNodeRef);
+    const animationTime=100
+
+    clearAnimationTimeouts(); // Clear previous timeouts
+
+    animationNodes.forEach((node,i)=>{
+      let timeoutId=setTimeout((i)=>{
+        newGrid[node.x][node.y].pathBack=true;
+        setGrid([...newGrid])
+      }, i*animationTime)
+      setAnimationTimeouts(prev => [...prev, timeoutId]); // Store timeout ID
+    })
+ 
   }
 
   //BFS
@@ -154,8 +168,8 @@ export default function PathgingVisualizer(){
       <Modal status={modalStatus} setStatus={setModalStatus}/>
       <div className="container">
         <button onClick={handleVisualizeBreadthFirstSearch}>Visualize Breadth First Search</button>
-        <button onClick={handleVisualizeDijkstras}>Visualize Dijkstra's</button>
         <button onClick={handleVisualizeDepthFirstSearch}>Visualize Depth First Search</button>
+        <button onClick={handleVisualizeDijkstras}>Visualize Dijkstra's</button>
         <button onClick={handleSetGrid}>Reset</button>
       </div>
       
