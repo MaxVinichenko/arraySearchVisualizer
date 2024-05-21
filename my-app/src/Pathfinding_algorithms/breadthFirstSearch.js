@@ -9,18 +9,22 @@ function validNeighbors (node,xlen,ylen,grid){
 
     if (0<=node.x-1 && node.x-1<xlen){
         if (grid[x-1][y].isVisited===false){
+            grid[x-1][y].prevNode=node;
             validNeighbors.push(grid[x-1][y])
         }
     }if (0<=node.y-1 && node.y-1<ylen){
         if (grid[x][y-1].isVisited===false){
+            grid[x][y-1].prevNode=node;
             validNeighbors.push(grid[x][y-1])
         }
     }if (0<=node.x+1 && node.x+1<xlen){
         if (grid[x+1][y].isVisited===false){
+            grid[x+1][y].prevNode=node;
             validNeighbors.push(grid[x+1][y])
         }
     }if (0<=node.y+1 && node.y+1<ylen){
         if (grid[x][y+1].isVisited===false){
+            grid[x][y+1].prevNode=node;
             validNeighbors.push(grid[x][y+1])
         }
     }
@@ -62,44 +66,23 @@ export default function BreadthFirstSearch(grid, startNodeRef, endNodeRef){
         }
     }
 
-    //Now we need to backtrack to find the path
-    const xStart=endNode.x
-    const yStart=endNode.y
-    const xEnd=startNode.x
-    const yEnd=startNode.y
-    let pathBack=new Queue();
 
-    //first travel in x direciton
-    pathBack.push(endNode)
-    let x = xStart;
-    let diffX=x-xEnd;
-    
-    do{
-        if (diffX>0){
-            x-=1
-            pathBack.push(grid[x][yStart])
-        }else if(diffX<0){
-            x+=1
-            pathBack.push(grid[x][yStart])
-        }else if (diffX==0){
-            pathBack.push(grid[x][yStart])
-        }
-        diffX=x-xEnd
-    }while (diffX!=0);
+    //return the pathBack
+    let pathBack = new Queue();
+    let node=endNode;
+    pathBack.push(node);
 
-    // then travel in y direction 
-    let y = yStart;
-    let diffY=y-yEnd;
-    do{
-        if (diffY>0){
-            y--
-            pathBack.push(grid[x][y])
-        }else{
-            y++
-            pathBack.push(grid[x][y])
+    while(true){ 
+        let prevNode=node.prevNode;
+        pathBack.push(prevNode)
+
+        if (prevNode.isStart==true){
+            break
         }
-        diffY=y-yEnd;
-    }while (diffY!=0);
+        node=prevNode;
+
+    }
+
 
     return [animationNodes, pathBack]
 }

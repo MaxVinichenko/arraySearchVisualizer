@@ -19,7 +19,7 @@ export default function SortingVisuzlizer() {
     for (let i = 0; i < 99; i++) {
       let randomNumber = Math.floor(Math.random() * (900 - 45 + 1)) + 90;
       newNodes.push({
-        value: randomNumber,
+        value: randomNumber*0.8,
         index: i,
         isHighlited: false,
         isSwapped: false,

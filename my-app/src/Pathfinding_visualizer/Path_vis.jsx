@@ -60,7 +60,8 @@ export default function PathgingVisualizer(){
           distance: xlen.current*ylen.current,
           animate: false,
           pathBack: false,
-          prevNode: null
+          prevNode: null,
+          prevNode: false,
           //---------------------------------------------
         });
       }
