@@ -38,6 +38,7 @@ export default function DepthFirstSearch(grid,startNodeRef,endNodeRef){
     const ylen=grid[0].length;
 
     let startNode=startNodeRef.current;
+    grid[startNode.x][startNode.y].isVisited=true;
     let endNode=endNodeRef.current;
     let animationNodes=[];
 
