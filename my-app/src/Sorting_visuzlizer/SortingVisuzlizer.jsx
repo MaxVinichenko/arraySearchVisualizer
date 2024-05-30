@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Node from "./Node/Node";
 import "./SortingVisuzlizer.css";
@@ -7,13 +7,14 @@ import bubblesort from "../Sorting_algorithms/bubbleSort";
 
 export default function SortingVisuzlizer() {
   const [nodes, updateNodes] = useState([]);
-
+  const stopFlagRef = useRef(0);
   useEffect(() => {
     handleGenerateNewArray();
   }, []);
 
   //creating nodes
   function handleGenerateNewArray() {
+    stopFlagRef.current+=1;
     let newNodes = [];
 
     for (let i = 0; i < 99; i++) {
@@ -33,6 +34,7 @@ export default function SortingVisuzlizer() {
     new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
   function handleVisualizeInsertion() {
+    const currentVis=stopFlagRef.current;
     const visualize = async () => {
       let swappedI = insertionSort(nodes);
       let animationNodes = [...nodes];
@@ -41,11 +43,17 @@ export default function SortingVisuzlizer() {
       for (let i = 0; i < swappedI.length; i++) {
         //swappedI is an array of arrays of either 2 or one elements
         //2 elements means swap the two, 1 means highlit the current node
+        if (stopFlagRef.current!=currentVis){
+          break;
+        }
         if (swappedI[i].length === 1) {
           //logic for highliting
           if (previous != null) {
             for (let i = 0; i < animationNodes.length; i++) {
               animationNodes[i].isHighlited = false;
+            }
+            if (stopFlagRef.current!=currentVis){
+              break;
             }
             updateNodes([...animationNodes]);
           }
@@ -56,6 +64,9 @@ export default function SortingVisuzlizer() {
             for (let j = 0; j < previous; j++) {
               animationNodes[j].isInplace = true;
             }
+          }
+          if (stopFlagRef.current!=currentVis){
+            break;
           }
           updateNodes([...animationNodes]);
           continue;
@@ -73,6 +84,9 @@ export default function SortingVisuzlizer() {
             animationNodes[secondI],
             animationNodes[firstI],
           ];
+          if (stopFlagRef.current!=currentVis){
+            break;
+          }
           updateNodes([...animationNodes]);
         }
       }
@@ -86,21 +100,30 @@ export default function SortingVisuzlizer() {
           animationNodes[j].isInplace = true;
         }
       }
-      updateNodes([...animationNodes]);
+      if (stopFlagRef.current==currentVis){
+        updateNodes([...animationNodes]);
+      }
     };
     visualize();
   }
 
   function handleVisualizeBubble() {
+    const currentVis=stopFlagRef.current;
     const visualize = async () => {
       let animationNodes = [...nodes];
       let animations = bubblesort(nodes);
       let inplaceI;
 
       for (let i = 0; i < animations.length; i++) {
+        if (stopFlagRef.current!=currentVis){
+          break;
+        }
         if (animations[i].length==1){
           inplaceI = animations[i][0]
           animationNodes[inplaceI].isInplace=true;
+          if (stopFlagRef.current!=currentVis){
+            break;
+          }
           updateNodes([...animationNodes]);
           continue
         }
@@ -114,10 +137,16 @@ export default function SortingVisuzlizer() {
           animationNodes[secondI],
           animationNodes[firstI],
         ];
+        if (stopFlagRef.current!=currentVis){
+          break;
+        }
         updateNodes([...animationNodes]);
         await wait(2);
         animationNodes[firstI].isSwapped = false;
         animationNodes[secondI].isSwapped = false;
+        if (stopFlagRef.current!=currentVis){
+          break;
+        }
         updateNodes([...animationNodes]);
       }
       for (let i=0; i<animationNodes.length; i++){
