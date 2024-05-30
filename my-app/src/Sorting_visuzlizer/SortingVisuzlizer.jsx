@@ -77,7 +77,7 @@ export default function SortingVisuzlizer() {
           let secondI = swappedI[i][1];
           animationNodes[firstI].isSwapped = true;
           animationNodes[secondI].isSwapped = true;
-          await wait(2);
+          await wait(16);
           animationNodes[firstI].isSwapped = false;
           animationNodes[secondI].isSwapped = false;
           [animationNodes[firstI], animationNodes[secondI]] = [
@@ -141,7 +141,7 @@ export default function SortingVisuzlizer() {
           break;
         }
         updateNodes([...animationNodes]);
-        await wait(2);
+        await wait(16);
         animationNodes[firstI].isSwapped = false;
         animationNodes[secondI].isSwapped = false;
         if (stopFlagRef.current!=currentVis){
