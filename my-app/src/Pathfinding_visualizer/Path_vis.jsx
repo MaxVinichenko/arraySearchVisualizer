@@ -85,14 +85,7 @@ export default function PathgingVisualizer(){
     // if selected more than 2, could add a pop up asking to reset the grid
   }
 
-  //Dijkstras
-  function handleVisualizeDijkstras(){
-    if (startNodeRef.current==null || endNodeRef.current==null){
-      setModalStatus(true);
-      return null;
-    }
 
-  }
 
   function handleVisualizeDepthFirstSearch(){
     if (startNodeRef.current==null || endNodeRef.current==null){
@@ -161,6 +154,15 @@ export default function PathgingVisualizer(){
         setGrid([...newGrid])
       },animationNodes.length*animationTime+i*60)
     }
+
+  }
+  //Dijkstras
+  function handleVisualizeDijkstras(){
+    if (startNodeRef.current==null || endNodeRef.current==null){
+      setModalStatus(true);
+      return null;
+    }
+    handleVisualizeBreadthFirstSearch();
 
   }
 
